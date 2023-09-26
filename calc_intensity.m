@@ -101,7 +101,7 @@ function [boundary, intensity_inside, intensity_between] = calc_intensity(orig_i
     result_between = {offset_length*k, stats.Area,sum(roiPixelsBetweenOffsetAndHull),mean(roiPixelsBetweenOffsetAndHull),...
         median(roiPixelsBetweenOffsetAndHull),std(double(roiPixelsBetweenOffsetAndHull)), max(roiPixelsBetweenOffsetAndHull)};
     location = strcat('A', num2str(k+1));
-    writecell(result_between, excelFile, 'Sheet', 'Between hull and offset curve','Range', location);
+    writecell(result_between, excelFile, 'Sheet', 'Between offset curve','Range', location);
     
     % Display the computed intensity statistics for the new ROI
     fprintf('Mean Intensity Between Offset and Hull for offset value %.2f μm is: %.2f\n', offset_length*k,mean(roiPixelsBetweenOffsetAndHull));
