@@ -20,18 +20,18 @@ function [boundary, intensity_inside, intensity_between] = calc_intensity(orig_i
     offsetPolygon = polybuffer(offsetPolygon, offset, 'JointType', 'round');
     boundary = offsetPolygon;
 
-    % Display the binary image
+    %%%%%Display the binary image
     % figure();
     % title('Convex hull and offset cuve')
     % imshow(orig_image);
     % hold on; % Allow superimposing the boundary on the image
     % 
-    % %plot the polygon
+    % %%%%%plot the polygon
     % plot(convexHullY, convexHullX, 'r', 'LineWidth', 2);
     % hold on;
     % % Plot the offset polygon in red
     % plot(offsetPolygon, 'FaceColor', 'none', 'EdgeColor', 'r', 'LineWidth', 2);
-    % 
+
     % hold off; % Release the hold on the image
     
     
@@ -46,10 +46,10 @@ function [boundary, intensity_inside, intensity_between] = calc_intensity(orig_i
     roiPixels = orig_image(roiMaskInside);
     
     % Assign a colormap for visualizing the ROI
-    coloredImage = orig_image;
-    coloredImage(roiMaskInside) = 200; % Assign a color (white) to the ROI pixels
+    % coloredImage = orig_image;
+    % coloredImage(roiMaskInside) = 200; % Assign a color (white) to the ROI pixels
     
-    % Display the grayscale image with the ROI overlay
+    %%%%%Display the grayscale image with the ROI overlay
     % figure();
     % imshow(coloredImage);
     % title('Grayscale original Image with ROI Overlay inside offset curve');
@@ -68,7 +68,7 @@ function [boundary, intensity_inside, intensity_between] = calc_intensity(orig_i
     location = strcat('A', num2str(k+1));
     writecell(result_inside, excelFile, 'Sheet', 'Inside offset Curve','Range', location);
 
-    % Display the computed intensity statistics
+    % %%%Display the computed intensity statistics
     fprintf('Mean Intensity within the offset cuve for offset value of %.2f μm is: %.2f\n', offset_length*k, meanIntensity);
     fprintf('Median Intensity within the offset curve: %.2f\n', medianIntensity);
     
@@ -81,11 +81,11 @@ function [boundary, intensity_inside, intensity_between] = calc_intensity(orig_i
     roiMaskBetweenOffsetAndHull = ~roiMaskInside & convexHullMask;%roiMaskBetweenHullAndOffset;
     
     % Assign a colormap for visualizing the ROI
-    %figure();
-    coloredImage = orig_image;
-    coloredImage(roiMaskBetweenOffsetAndHull) = 200; % Assign a color (white) to the ROI pixels
+    % figure();
+    % coloredImage = orig_image;
+    % coloredImage(roiMaskBetweenOffsetAndHull) = 200; % Assign a color (white) to the ROI pixels
     
-    % Display the grayscale image with the ROI overlay
+    %%%Display the grayscale image with the ROI overlay
     % figure();
     % imshow(coloredImage);
     % title('Grayscale Image with ROI Overlay between offset curve and convex hull');
