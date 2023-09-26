@@ -3,8 +3,8 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     %%%%%%%%%%%%%%%%%% Preparing for the output excel sheet
     data_fields = {'Offset value (in μm)', 'Area of ROI (in pixels)', 'Total (Integrated) intensity', 'Mean Intensity',...
         'Median intensity', 'Std. Deviation of Intensity', 'Maximum intensity'}; % more variables can be added if needed and they should be calculated in calc_intensity function
+    writecell(data_fields, excelFile, 'Sheet', 'Between offset curve');
     writecell(data_fields, excelFile, 'Sheet', 'Inside offset Curve');
-    writecell(data_fields, excelFile, 'Sheet', 'Between hull and offset curve');
     %%%%%%%%%%%%%%%%%%
     
     %%%%%%%%%%%%% This part of the code changes the image to a binary grey
@@ -48,13 +48,16 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     
     filledImage = imfill(binaryImageCleaned_8bit, 'holes');
     
-    % Display the eroded image with filled holes
+    [conv_hullX, conv_hullY, offsetVal] = get_conv_hull(filledImage, offsetVal_per_50);
+    orig_convHullX = conv_hullX; orig_convHullY = conv_hullY;
+    
+        % Display the eroded image with filled holes
     figure();
     imshow(filledImage);
-    title('Binary Image with Holes Filled and used to compute convex hull');
-    
-    [conv_hullX, conv_hullY, offsetVal] = get_conv_hull(filledImage, offsetVal_per_50);
-    
+    hold on;
+    plot(orig_convHullY, orig_convHullX, 'r', 'LineWidth', 2);
+    title('Binary Image with Holes Filled and computed convex hull');
+
     %%%%Saving the binary image used for further calculation
     %%%%imwrite(filledImage, imageName)
     
@@ -62,10 +65,11 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     %%%%% using the original image
     j = 1;
     for i = offsetVal
-        [boundary(j), inside(j), between(j)] = calc_intensity(originalImage,conv_hullX,conv_hullY, i,j, excelFile, offset_length);
+        [boundary(j), inside(j), between(j)] = calc_intensity(originalImage,conv_hullX,conv_hullY, offsetVal_per_50,j, excelFile, offset_length);
         if(inside(j)==0)
             break;
         end
+        conv_hullY = boundary(j).Vertices(:,1); conv_hullX = boundary(j).Vertices(:,2);
         j= j+1;
     end
     
@@ -74,7 +78,7 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     offsetVal = offsetVal(1:length(final_inside));
     
     %%%% The following line deletes all the non-required variables
-    clearvars('-except','final_between', 'offset_length', 'final_inside','gray16BitImage','conv_hullY','conv_hullX','boundary','normalizedImage')
+    clearvars('-except','final_between', 'offset_length', 'final_inside','gray16BitImage','orig_convHullX','orig_convHullY','boundary','normalizedImage')
     
     %%%% This figure plots all the considered offset curves
     figure();
@@ -82,7 +86,7 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     hold on; % Allow superimposing the boundary on the image
     
     %%%%%plot the polygon
-    plot(conv_hullY, conv_hullX, 'g', 'LineWidth', 2);
+    plot(orig_convHullY, orig_convHullX, 'g', 'LineWidth', 2);
     hold on;
     %%%%Plot the offset polygon in red
     for i=1:length(final_inside)
