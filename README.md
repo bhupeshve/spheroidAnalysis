@@ -7,7 +7,7 @@ Author: Bhupesh Verma, Anwesha Sarkar
 
 Date: September 22, 2023
 
-Description: This script analyses the spheroids and outputs Offset value (in μm), Area of ROI (in pixels), Total (Integrated) intensity, Mean Intensity, Median intensity, Std. Deviation of Intensity, Maximum intensity in the excel sheet 
+Description: This script analyses the spheroids and outputs Offset value (in μm), Area of ROI (in pixels), Total (Integrated) intensity, Mean Intensity, Median intensity, Std. Deviation of Intensity, Maximum intensity in the excel sheet. The excel provides these values in a region of length specified by the 'offset length' variable.
 
 Usage: This script requires spheroidAnalysis.m, calc_intensity.m and get_conv_hull.m in the same folder as this script. User needs to input the name of the image to be process ONLY IN TIF format. User also needs to specify the size of the spheroids from the experiments and adjust the minComponentSize to remove the noise from the image. Also dilation_radius can be increased if the image contains larger holes which needs to be filled.
 
@@ -19,8 +19,8 @@ Notes:
 
 - This code is prepared for spheroid analysis for Anwesha Sarkar's PhD thesis at University College Dublin (UCD)
 
-![ROI_inside_offset_curve](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/486c0913-a4ad-4283-b734-515bf571704b)
-![ROI_between_offset_curve_and_convexHull](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/3d69ba1d-13b9-4a2d-96b2-07992d7eff37)
-![convex_hull_and_offset_curve](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/fbd61640-d800-4141-98c6-781c163d2ec7)
+  ![Screenshot 2023-09-26 202029](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/6d6856e1-111d-4f62-8ed5-359806a22c22)
+![Screenshot 2023-09-26 202142](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/48b40185-9a23-46b8-9da6-52f82b6aa57a)
 
 
+![Screenshot 2023-09-26 202113](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/44516e8a-5462-467c-97da-77b76fb8c1e8)
