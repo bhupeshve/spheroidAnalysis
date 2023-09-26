@@ -42,3 +42,9 @@ Analysis of spheroid images for varying intensity
 % thesis at University College Dublin (UCD)
 
 % ------------------------------------------------------------------------
+
+![ROI_inside_offset_curve](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/486c0913-a4ad-4283-b734-515bf571704b)
+![ROI_between_offset_curve_and_convexHull](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/3d69ba1d-13b9-4a2d-96b2-07992d7eff37)
+![convex_hull_and_offset_curve](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/fbd61640-d800-4141-98c6-781c163d2ec7)
+
+
