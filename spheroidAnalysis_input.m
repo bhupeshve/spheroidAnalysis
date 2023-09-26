@@ -1,12 +1,13 @@
 % ------------------------------------------------------------------------
 % MATLAB Script -> SpheroidAnalysis_input.m
 % Author: Bhupesh Verma, Anwesha Sarkar
-% Date: September 22, 2023
+% Date: September 26, 2023
 %
 % Description: This script analyses the spheroids and outputs Offset value (in μm),
 % Area of ROI (in pixels), Total (Integrated) intensity, Mean
 % Intensity, Median intensity, Std. Deviation of Intensity, Maximum
-% intensity in the excel sheet
+% intensity in the excel sheet. The excel provides these values in a region
+% of length specified by the 'offset length variable'
 %
 % Usage: This script requires spheroidAnalysis.m, calc_intensity.m and get_conv_hull.m in
 % the same folder as this script. User needs to input the name of the image
