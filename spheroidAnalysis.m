@@ -65,10 +65,11 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     %%%%% using the original image
     j = 1;
     for i = offsetVal
-        [boundary(j), inside(j), between(j), result_inside] = calc_intensity(originalImage,conv_hullX,conv_hullY, offsetVal_per_50,j, excelFile, offset_length);
+        [boundary(j), inside(j), between(j), result_inside_loc] = calc_intensity(originalImage,conv_hullX,conv_hullY, offsetVal_per_50,j, excelFile, offset_length);
         if(inside(j)==0)
             break;
         end
+        result_inside = result_inside_loc;
         conv_hullY = boundary(j).Vertices(:,1); conv_hullX = boundary(j).Vertices(:,2);
         j= j+1;
     end
