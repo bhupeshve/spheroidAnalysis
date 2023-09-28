@@ -2,7 +2,7 @@
 %%%% data_fields = {'Offset value (in μm)', 'Area of ROI (in pixels)' 'Total (Integrated) intensity', 'Mean Intensity',...
 %%%% Median intensity', 'Std. Deviation of Intensity'};
 
-function [boundary, intensity_inside, intensity_between] = calc_intensity(orig_image, convexHullX, convexHullY, offsetVal, k, excelFile, offset_length)
+function [boundary, intensity_inside, intensity_between, result_inside] = calc_intensity(orig_image, convexHullX, convexHullY, offsetVal, k, excelFile, offset_length)
 
     %initializing all the outputs
     boundary = []; intensity_inside = 0; intensity_between=0; 
@@ -66,7 +66,7 @@ function [boundary, intensity_inside, intensity_between] = calc_intensity(orig_i
     medianIntensity = median(roiPixels);
     result_inside = {offset_length*k, stats.Area,sum(roiPixels),mean(roiPixels),median(roiPixels),std(double(roiPixels)), max(roiPixels)};
     location = strcat('A', num2str(k+1));
-    writecell(result_inside, excelFile, 'Sheet', 'Inside offset Curve','Range', location);
+    %%%%writecell(result_inside, excelFile, 'Sheet', 'Inside offset Curve','Range', location);
 
     % %%%Display the computed intensity statistics
     fprintf('Mean Intensity within the offset cuve for offset value of %.2f μm is: %.2f\n', offset_length*k, meanIntensity);
