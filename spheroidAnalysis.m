@@ -4,7 +4,7 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     data_fields = {'Offset value (in μm)', 'Area of ROI (in pixels)', 'Total (Integrated) intensity', 'Mean Intensity',...
         'Median intensity', 'Std. Deviation of Intensity', 'Maximum intensity'}; % more variables can be added if needed and they should be calculated in calc_intensity function
     writecell(data_fields, excelFile, 'Sheet', 'Between offset curve');
-    writecell(data_fields, excelFile, 'Sheet', 'Inside offset Curve');
+    %%%%writecell(data_fields, excelFile, 'Sheet', 'Inside offset Curve');
     %%%%%%%%%%%%%%%%%%
     
     %%%%%%%%%%%%% This part of the code changes the image to a binary grey
@@ -65,13 +65,17 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     %%%%% using the original image
     j = 1;
     for i = offsetVal
-        [boundary(j), inside(j), between(j)] = calc_intensity(originalImage,conv_hullX,conv_hullY, offsetVal_per_50,j, excelFile, offset_length);
+        [boundary(j), inside(j), between(j), result_inside] = calc_intensity(originalImage,conv_hullX,conv_hullY, offsetVal_per_50,j, excelFile, offset_length);
         if(inside(j)==0)
             break;
         end
         conv_hullY = boundary(j).Vertices(:,1); conv_hullX = boundary(j).Vertices(:,2);
         j= j+1;
     end
+
+    %%%%% write the data of the innermost region of the spheroid
+    location_write = strcat('A', num2str(j+1));
+    writecell(result_inside, excelFile, 'Sheet', 'Between offset curve', 'Range', location_write);
     
     % calculation of final mean intensity
     final_inside = inside(inside~=0); final_between = between(between~=0);
