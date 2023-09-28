@@ -5,7 +5,7 @@
 function [boundary, intensity_inside, intensity_between, result_inside] = calc_intensity(orig_image, convexHullX, convexHullY, offsetVal, k, excelFile, offset_length)
 
     %initializing all the outputs
-    boundary = []; intensity_inside = 0; intensity_between=0; 
+    boundary = []; intensity_inside = 0; intensity_between=0; result_inside = {0};
 
     % Offset value (adjust as needed)
     offset = offsetVal; % Number of pixels to expand (use negative value to shrink)
