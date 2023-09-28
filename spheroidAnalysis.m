@@ -82,7 +82,7 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     offsetVal = offsetVal(1:length(final_inside));
     
     %%%% The following line deletes all the non-required variables
-    clearvars('-except','final_between', 'offset_length', 'final_inside','gray16BitImage','orig_convHullX','orig_convHullY','boundary','normalizedImage')
+    clearvars('-except','final_between', 'offset_length', 'final_inside','orig_convHullX','orig_convHullY','boundary','normalizedImage')
     
     %%%% This figure plots all the considered offset curves
     figure();
