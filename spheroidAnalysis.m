@@ -78,7 +78,7 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     location_write = strcat('A', num2str(j+2));
     text_in = {'Result inside'};
     writecell(text_in, excelFile,'Range', location_write);
-    location_write = strcat('A', num2str(j+1));
+    location_write = strcat('A', num2str(j+3));
     writecell(result_inside, excelFile, 'Sheet', 'Between offset curve', 'Range', location_write);
     
     % calculation of final mean intensity
