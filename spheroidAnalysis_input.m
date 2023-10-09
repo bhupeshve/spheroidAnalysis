@@ -30,11 +30,11 @@ clear;
 
 %%%%%%%%%%%% User input
 
-image_to_read = '5ugDMSO-ICG-4'; % name of the image to read, it should be specified without '.tif' at the end
+image_to_read = '5ugDMSO-ICG-1'; % name of the image to read, it should be specified without '.tif' at the end
 
 physical_size_of_image = 819.2; % physical size of the photographed to be specified in μm. It is assumed here that the photographed area is a square
 
-minComponentSize = 40; % Adjust as needed; 0 means it will not be used
+minComponentSize = 60; % Adjust as needed; 0 means it will not be used
 
 dilation_radius = 10; % can be adjusted if bigger holes need to be filled
 
