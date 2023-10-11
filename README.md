@@ -16,9 +16,9 @@ Notes:
 - User input required for physical_size_of_image and offset_length
 
 - It is advised to first find the minComponentSize and dilation_radius variable for an image. Recommended values of minComponentSize are 20, 40, 60 and 80 for minComponentSize AND 5, 10, 20 and 30 for dilation_radius.
-- 
+  
 - In this code, it is assumed that images captured have the same height and width (or no. of pixels in both directions)
-- 
+  
 - This code is prepared for spheroid analysis for Anwesha Sarkar's PhD thesis at University College Dublin (UCD)
 
   ![Screenshot 2023-09-26 202029](https://github.com/bhupeshve/spheroidAnalysis/assets/146075582/6d6856e1-111d-4f62-8ed5-359806a22c22)
