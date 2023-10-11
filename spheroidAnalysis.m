@@ -3,7 +3,8 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     %%%%%%%%%%%%%%%%%% Preparing for the output excel sheet
     data_fields = {'Offset value (in μm)', 'Area of ROI (in pixels)', 'Total (Integrated) intensity', 'Mean Intensity',...
         'Median intensity', 'Std. Deviation of Intensity', 'Maximum intensity'}; % more variables can be added if needed and they should be calculated in calc_intensity function
-    writecell(data_fields, excelFile, 'Sheet', 'Between offset curve');
+    writecell(data_fields, excelFile, 'Sheet', 'Intensity results');
+
     %%%%writecell(data_fields, excelFile, 'Sheet', 'Inside offset Curve');
     %%%%%%%%%%%%%%%%%%
     
@@ -74,16 +75,11 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
         j= j+1;
     end
 
-    %%%%% write the data of the innermost region of the spheroid
-    location_write = strcat('A', num2str(j+2));
-    text_in = {'Result inside'};
-    writecell(text_in, excelFile,'Range', location_write);
-    location_write = strcat('A', num2str(j+3));
-    writecell(result_inside, excelFile, 'Sheet', 'Between offset curve', 'Range', location_write);
-    
+    final_inside = calc_intensity_inside(originalImage, boundary(j-1), excelFile, j);
     % calculation of final mean intensity
-    final_inside = inside(inside~=0); final_between = between(between~=0);
-    offsetVal = offsetVal(1:length(final_inside));
+    %final_inside = inside(inside~=0); 
+    final_between = between(between~=0);
+    offsetVal = offsetVal(1:length(final_between));
     
     %%%% The following line deletes all the non-required variables
     clearvars('-except','final_between', 'offset_length', 'final_inside','orig_convHullX','orig_convHullY','boundary','normalizedImage')
@@ -97,7 +93,7 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     plot(orig_convHullY, orig_convHullX, 'g', 'LineWidth', 2);
     hold on;
     %%%%Plot the offset polygon in red
-    for i=1:length(final_inside)
+    for i=1:length(final_between)
         plot(boundary(i), 'FaceColor', 'none', 'EdgeColor', 'r', 'LineWidth', 2);
         offset(i) = offset_length*i;
         hold on
@@ -108,8 +104,8 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     
     %%%%%%%%% This figure plots the variation of mean instensity
     figure();
-    plot(offset,final_inside,'*-', 'color','blue')
-    hold on;
+    %plot(offset,final_inside,'*-', 'color','blue')
+    %hold on;
     plot(offset,final_between,'+-', 'color', 'red')
     legend('Inside the offset curve', 'In-between offset curve and convex hull','Location','southeast')
     title('Mean intensity variation')
