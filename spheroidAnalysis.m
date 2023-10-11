@@ -4,9 +4,6 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     data_fields = {'Offset value (in μm)', 'Area of ROI (in pixels)', 'Total (Integrated) intensity', 'Mean Intensity',...
         'Median intensity', 'Std. Deviation of Intensity', 'Maximum intensity'}; % more variables can be added if needed and they should be calculated in calc_intensity function
     writecell(data_fields, excelFile, 'Sheet', 'Intensity results');
-
-    %%%%writecell(data_fields, excelFile, 'Sheet', 'Inside offset Curve');
-    %%%%%%%%%%%%%%%%%%
     
     %%%%%%%%%%%%% This part of the code changes the image to a binary grey
     %%%%%%%%%%%%% scale image
@@ -52,15 +49,12 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     [conv_hullX, conv_hullY, offsetVal] = get_conv_hull(filledImage, offsetVal_per_50);
     orig_convHullX = conv_hullX; orig_convHullY = conv_hullY;
     
-        % Display the eroded image with filled holes
+    % Display the eroded image with filled holes
     figure();
     imshow(filledImage);
     hold on;
     plot(orig_convHullY, orig_convHullX, 'r', 'LineWidth', 2);
     title('Binary Image with Holes Filled and computed convex hull');
-
-    %%%%Saving the binary image used for further calculation
-    %%%%imwrite(filledImage, imageName)
     
     %%%%% This calls the function to calculate the intensity of the variables
     %%%%% using the original image
@@ -76,8 +70,8 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     end
 
     final_inside = calc_intensity_inside(originalImage, boundary(j-1), excelFile, j);
+
     % calculation of final mean intensity
-    %final_inside = inside(inside~=0); 
     final_between = between(between~=0);
     offsetVal = offsetVal(1:length(final_between));
     
@@ -104,10 +98,8 @@ function spheroidAnalysis(image_to_read, physical_size_of_image, minComponentSiz
     
     %%%%%%%%% This figure plots the variation of mean instensity
     figure();
-    %plot(offset,final_inside,'*-', 'color','blue')
-    %hold on;
     plot(offset,final_between,'+-', 'color', 'red')
-    legend('Inside the offset curve', 'In-between offset curve and convex hull','Location','southeast')
+    legend('In-between offset curve and convex hull','Location','southeast')
     title('Mean intensity variation')
     xlabel('Offset value [in μm]')
     ylabel('Mean intensity')
