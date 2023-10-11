@@ -1,7 +1,7 @@
 % ------------------------------------------------------------------------
 % MATLAB Script -> SpheroidAnalysis_input.m
 % Author: Bhupesh Verma, Anwesha Sarkar
-% Date: September 26, 2023
+% Date: October 11, 2023
 %
 % Description: This script analyses the spheroids and outputs Offset value (in μm),
 % Area of ROI (in pixels), Total (Integrated) intensity, Mean
@@ -21,12 +21,14 @@
 % - It is advised to first find the minComponentSize and dilation_radius
 % variable for an image. Recommended values of minComponentSize are
 % 20, 40, 60 and 80 for minComponentSize AND 5, 10, 20 and 30 for dilation_radius.
+% In this code, it is assumed that images captured have the same height and
+% width (or no. of pixels in both directions)
 % - This code is prepared for spheroid analysis for Anwesha Sarkar's PhD
 % thesis at University College Dublin (UCD)
 % ------------------------------------------------------------------------
 
 close all;
-clear;
+clear all;
 
 %%%%%%%%%%%% User input
 
